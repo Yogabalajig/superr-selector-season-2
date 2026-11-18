@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SupeRR Selector | IPL 2027 Auction Shortlist</title>
+<style>
+:root{--bg:#0a1020;--panel:#111b30;--panel2:#17233b;--text:#eaf0ff;--muted:#9eacc8;--accent:#f0b429;--green:#5cdb9b;--line:#263653}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172742,#0a1020 55%);color:var(--text);font:15px/1.5 Inter,system-ui,Arial}
+.wrap{max-width:1200px;margin:auto;padding:28px 18px 60px}.hero{padding:28px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(120deg,#182a46,#10182b);margin-bottom:20px}
+.kicker{color:var(--accent);text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:800}.hero h1{font-size:clamp(26px,5vw,44px);line-height:1.1;margin:10px 0}.hero p{color:var(--muted);max-width:780px}.meta{display:flex;gap:10px;flex-wrap:wrap}.pill{border:1px solid var(--line);padding:6px 11px;border-radius:999px;color:var(--muted);font-size:12px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tabs button,.filter{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:10px 15px;border-radius:10px;cursor:pointer}.tabs button.active{background:var(--accent);color:#151a22;border-color:var(--accent);font-weight:800}
+.section{display:none}.section.active{display:block}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:17px}.card h3{margin:0 0 3px;font-size:18px}.rank{color:var(--accent);font-weight:900;font-size:12px;letter-spacing:.08em}.score{font-size:32px;font-weight:900;margin:4px 0}.sub{color:var(--muted);font-size:12px}.bars{display:grid;gap:7px;margin:12px 0}.barrow{display:grid;grid-template-columns:65px 1fr 34px;align-items:center;gap:7px;font-size:12px;color:var(--muted)}.bar{height:7px;background:#25334e;border-radius:9px;overflow:hidden}.bar span{display:block;height:100%;background:var(--green)}.tier{display:inline-block;border-radius:5px;padding:3px 7px;font-size:11px;font-weight:800;margin:8px 0}.tier1{background:#164f3b;color:#86f1b8}.tier2{background:#5a4215;color:#ffd77c}.tier3{background:#263b62;color:#a9caff}.tier4{background:#3b2a51;color:#d4b5ff}
+table{width:100%;border-collapse:collapse;margin:12px 0;background:var(--panel);border-radius:12px;overflow:hidden}th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-weight:700}td strong{color:var(--text)}.tablewrap{overflow-x:auto}.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.method .card h3{font-size:16px}.note{border-left:3px solid var(--accent);padding:12px 14px;background:#1a2335;border-radius:8px;color:var(--muted);margin:14px 0}.footer{color:var(--muted);font-size:12px;margin-top:24px;text-align:center}.search{width:100%;max-width:420px;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px;margin:10px 0}
+@media(max-width:650px){.wrap{padding:14px}.hero{padding:20px}th,td{padding:9px 7px;font-size:12px}}
+</style></head>
+<body><div class="wrap">
+<header class="hero"><div class="kicker">Rajasthan Royals · IPL 2027</div>
+<h1>SupeRR Selector<br>Updated Auction Shortlist</h1>
+<p>Pressure-performance rankings with separate injury/fitness and Rajasthan Royals squad-fit decision layers. A practical shortlist for auction prioritization—not a claim of confirmed player availability.</p>
+<div class="meta"><span class="pill">Data cut-off: 17 Nov 2026</span><span class="pill">10 Batters · 10 Bowlers</span><span class="pill">Decision score: PP 80% · Injury 10% · RR Fit 10%</span></div></header>
+<div class="tabs"><button class="active" onclick="show('batters',this)">Top 10 Batters</button><button onclick="show('bowlers',this)">Top 10 Bowlers</button><button onclick="show('strategy',this)">Auction Tiers</button><button onclick="show('method',this)">Methodology & Caveats</button></div>
+<section id="batters" class="section active"><h2>Top 10 Batters</h2><p class="sub">Sorted by Final Auction Decision Score</p><input class="search" placeholder="Filter batters by name…" oninput="filterCards('batters',this.value)"><div class="grid" id="batgrid"></div></section>
+<section id="bowlers" class="section"><h2>Top 10 Bowlers</h2><p class="sub">Sorted by Final Auction Decision Score</p><input class="search" placeholder="Filter bowlers by name…" oninput="filterCards('bowlers',this.value)"><div class="grid" id="bowlgrid"></div></section>
+<section id="strategy" class="section"><h2>Auction Priority Tiers</h2><div class="note">Tiers are an interpretation of score plus role/auction context. They are not equivalent to an instruction to bid at any price.</div><div class="method" id="tiergrid"></div></section>
+<section id="method" class="section"><h2>Methodology & Decision Guardrails</h2><div class="method">
+<div class="card"><h3>Pressure Performance (80%)</h3><p class="sub">Primary evidence layer: pressure performance score from IPL/T20I analysis. Pressure rankings remain provisional and depend on dataset definitions and thresholds.</p></div>
+<div class="card"><h3>Injury / Fitness (10%)</h3><p class="sub">Historical injury frequency 25%; severity/recovery 20%; recurrence 20%; recent status 20%; workload/availability 15%.</p></div>
+<div class="card"><h3>RR Squad Fit (10%)</h3><p class="sub">Role alignment 30%; skill/phase contribution 25%; squad balance/slot economics 20%; role scarcity 15%; versatility 10%.</p></div>
+<div class="card"><h3>Formula</h3><p><strong>Final = 0.80 × PP + 0.10 × Injury + 0.10 × RR Fit</strong></p><p class="sub">PP + Injury lens = 0.90 × PP + 0.10 × Injury.</p></div>
+</div>
+<div class="note"><strong>Important score caveat:</strong> Injury score 50 is a neutral placeholder where reliable player-specific evidence is incomplete; it is not a medical clearance. Pathirana (20) and Hasaranga (25) are provisional risk discounts pending medical-grade verification. No player should be treated as auction-available until registration and availability are confirmed. Rankings are analyst decision support and should be revisited against final auction list, squad composition, budget and medical checks.</div>
+<div class="card"><h3>Pressure score limitations</h3><p class="sub">Pressure cut-off and scoring weights are experimental. Scores combine competition-normalized evidence where available. Sensitivity testing showed moderate batter and higher bowler ranking sensitivity to the pressure threshold; use ranks alongside score gaps and role context.</p></div>
+</section>
+<div class="footer">Standalone shortlist page · SupeRR Selector Season 2 · Provisional research and analyst scoring</div></div>
+<script>
+const batters=[
+["Sikandar Raza",76.75,50,80,74.40,"Tier 1","Experienced multi-skill option; assess middle-order utility and overseas-slot trade-off. Verify workload and full-window availability."],
+["Mark Chapman",71.28,50,60,67.02,"Tier 1","Left-hand middle-order option; IPL role translation and overseas slot value require validation."],
+["M. Shahrukh Khan",61.70,50,95,63.86,"Tier 2","High-priority Indian finishing/middle-order profile. Validate fitness and role-specific readiness."],
+["Shimron Hetmyer",52.39,50,95,56.42,"Tier 2","Known RR finishing role and strong role alignment; check fitness and overseas-slot cost."],
+["Mahipal Lomror",47.63,50,80,51.10,"Tier 3","Indian middle-order depth and batting flexibility; verify recent participation."],
+["Kamindu Mendis",49.42,50,60,50.54,"Tier 3","Multi-skill option; primary role and overseas value need clarity."],
+["Nitish Rana",42.33,50,75,46.36,"Tier 4","Indian top/middle-order cover; assess overlap with retained batters."],
+["Nehal Wadhera",37.52,50,85,43.52,"Tier 4","Indian middle-order option with useful squad-balance fit."],
+["Rachin Ravindra",31.44,50,65,36.65,"Tier 4","Overseas multi-skill player; role overlap and slot cost constrain fit."],
+["Aman Khan",30.56,50,65,35.95,"Tier 4","Indian power-hitting/all-round depth; secondary skill needs validation."]
+];
+const bowlers=[
+["Dushmantha Chameera",74.69,50,85,73.25,"Tier 1","Overseas pace reinforcement; evaluate phase coverage, workload and full-season availability."],
+["Matheesha Pathirana",76.64,20,85,71.81,"Tier 1","Scarce death-overs skill and strong role value. Mandatory medical review and workload safeguards."],
+["Wanindu Hasaranga",70.25,25,65,65.20,"Tier 2","Wicket-taking spin/all-round value; role overlap and overseas slot lower fit. Medical review essential."],
+["Umran Malik",58.64,50,90,60.91,"Tier 2","Indian pace profile and squad-balance value; phase execution and fitness to be verified."],
+["Jaydev Unadkat",59.26,50,75,59.90,"Tier 2","Indian left-arm pace depth and matchup variety; verify role readiness."],
+["Gerald Coetzee",55.82,50,80,56.16,"Tier 3","Overseas pace option; phase role and slot economics to be assessed."],
+["Blessing Muzarabani",50.78,50,75,53.12,"Tier 3","Overseas pace depth and angle variation; confirm registration and availability."],
+["Adam Milne",50.17,50,70,52.14,"Tier 3","Overseas pace option; acquisition case must beat alternatives."],
+["Tushar Deshpande",43.72,50,80,47.98,"Tier 4","Indian pace depth and RR familiarity; verify fitness and role execution."],
+["Keshav Maharaj",46.23,50,45,46.49,"Tier 4","Overseas spin slot has higher opportunity cost given current resources; progress only for a defined spin need."]
+];
+function tierClass(t){return t==="Tier 1"?"tier1":t==="Tier 2"?"tier2":t==="Tier 3"?"tier3":"tier4"}
+function card(p,i){return '<div class="card player"><div class="rank">RANK '+(i+1)+'</div><h3>'+p[0]+'</h3><span class="tier '+tierClass(p[5])+'">'+p[5]+'</span><div class="score">'+p[4].toFixed(2)+'<span class="sub"> / 100</span></div><div class="sub">Final Auction Decision Score</div><div class="bars">'+[['PP',p[1]],['Injury',p[2]],['RR Fit',p[3]]].map(x=>'<div class="barrow"><span>'+x[0]+'</span><div class="bar"><span style="width:'+x[1]+'%"></span></div><b>'+x[1]+'</b></div>').join('')+'</div><p>'+p[6]+'</p></div>'}
+function render(){document.getElementById('batgrid').innerHTML=batters.map(card).join('');document.getElementById('bowlgrid').innerHTML=bowlers.map(card).join('');const tiers=[["Tier 1 · Priority targets",batters.slice(0,2).concat(bowlers.slice(0,2))],["Tier 2 · Strong role/value targets",batters.slice(2,4).concat(bowlers.slice(2,5))],["Tier 3 · Secondary options",batters.slice(4,6).concat(bowlers.slice(5,8))],["Tier 4 · Depth / situational",batters.slice(6).concat(bowlers.slice(8))]];document.getElementById('tiergrid').innerHTML=tiers.map(t=>'<div class="card"><h3>'+t[0]+'</h3>'+t[1].map(p=>'<p><strong>'+p[0]+'</strong><br><span class="sub">Final score '+p[4].toFixed(2)+' · '+p[5]+'</span></p>').join('')+'</div>').join('')}
+function show(id,btn){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));btn.classList.add('active')}
+function filterCards(section,q){const grid=section==='batters'?'batgrid':'bowlgrid';document.getElementById(grid).innerHTML=(section==='batters'?batters:bowlers).filter(p=>p[0].toLowerCase().includes(q.toLowerCase())).map(card).join('')}
+render();
+</script></body></html>
